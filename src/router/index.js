@@ -1,14 +1,28 @@
 import sourceData from '@/data.json'
-import PageHome from '@/components/PageHome'
-import PageNotFound from '@/components/PageNotFound'
-import PageThreadShow from '@/components/PageThreadShow'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import Home from '@/pages/Home'
+import NotFound from '@/pages/NotFound'
+import ThreadShow from '@/pages/ThreadShow'
+import Forum from '@/pages/Forum'
+import Category from '@/pages/Category'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
-  { path: '/', component: PageHome, name: 'Home' },
+  { path: '/', component: Home, name: 'Home' },
+  {
+    path: '/categories/:id',
+    component: Category,
+    name: 'Category',
+    props: true
+  },
+  {
+    path: '/forums/:id',
+    component: Forum,
+    name: 'Forum',
+    props: true
+  },
   {
     path: '/thread/:id',
-    component: PageThreadShow,
+    component: ThreadShow,
     name: 'ThreadShow',
     props: true,
     beforeEnter (to, from, next) {
@@ -25,12 +39,12 @@ const routes = [
       }
     }
   },
-  { path: '/:pathMatch(.*)*', name: 'NotFound', component: PageNotFound }
+  { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound }
 ]
 
 const router = createRouter({
   // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes // short for `routes: routes`
 })
 
