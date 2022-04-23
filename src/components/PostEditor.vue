@@ -7,12 +7,8 @@ export default {
   },
   methods: {
     save () {
-      const postId = 'qqq' + Math.random()
       const post = {
-        id: postId,
-        text: this.text,
-        publishedAt: Math.floor(Date.now() / 1000),
-        userId: 'L664y3qZSubDbT1R6npC0EEybJ73'
+        text: this.text
       }
 
       this.$emit('save-post', { post })

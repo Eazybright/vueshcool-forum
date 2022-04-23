@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router/index'
+import store from './store/index'
 
 const app = createApp(App)
 
@@ -15,5 +16,7 @@ requireComponent.keys().forEach(function (fileName) {
   )
   app.component(baseComponentName, baseComponentConfig)
 })
+
+app.use(store)
 app.use(router)
 app.mount('#app')

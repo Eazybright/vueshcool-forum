@@ -2,12 +2,22 @@ import sourceData from '@/data.json'
 import Home from '@/pages/Home'
 import NotFound from '@/pages/NotFound'
 import ThreadShow from '@/pages/ThreadShow'
+import Profile from '@/pages/Profile'
 import Forum from '@/pages/Forum'
 import Category from '@/pages/Category'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   { path: '/', component: Home, name: 'Home' },
+  {
+    path: '/profile',
+    component: Profile,
+    name: 'Profile',
+    meta: {
+      toTop: true,
+      smoothScroll: true
+    }
+  },
   {
     path: '/categories/:id',
     component: Category,
@@ -45,7 +55,15 @@ const routes = [
 const router = createRouter({
   // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
   history: createWebHistory(),
-  routes // short for `routes: routes`
+  routes, // short for `routes: routes`
+  scrollBehaviuor (to) {
+    const scroll = {}
+    if (to.meta.toTop) scroll.top = 0
+
+    if (to.meta.smoothScroll) scroll.behavior = 'smooth'
+
+    return scroll
+  }
 })
 
 export default router

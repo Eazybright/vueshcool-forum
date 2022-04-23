@@ -1,6 +1,5 @@
 <script>
 import ForumList from './ForumList.vue'
-import sourceData from '@/data.json'
 
 export default {
   components: { ForumList },
@@ -10,9 +9,14 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      sourceData: this.$store.state
+    }
+  },
   methods: {
     getForumsForCategory (category) {
-      return sourceData.forums.filter(forum => forum.categoryId === category.id)
+      return this.sourceData.forums.filter(forum => forum.categoryId === category.id)
     }
   }
 }

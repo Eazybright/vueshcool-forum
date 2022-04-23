@@ -1,5 +1,4 @@
 <script>
-import sourceData from '@/data.json'
 import PostList from '@/components/PostList'
 import PostEditor from '@/components/PostEditor'
 
@@ -13,8 +12,8 @@ export default {
   components: { PostList, PostEditor },
   data () {
     return {
-      threads: sourceData.threads,
-      posts: sourceData.posts
+      threads: this.$store.state.threads,
+      posts: this.$store.state.posts
     }
   },
   computed: {
@@ -32,8 +31,7 @@ export default {
         threadId: this.id
       }
 
-      this.posts.push(post)
-      this.thread.posts.push(post.id)
+      this.$store.dispatch('createPost', post)
     }
   }
 }
